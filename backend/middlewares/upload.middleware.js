@@ -20,5 +20,6 @@ const fileFilter = (req, file, cb) => {
 
 const uploadHandler = multer({ storage, fileFilter, limits: {
     fileSize: 100 * 1024 // 100kb
-} })
+}})
+
 export default uploadHandler
