@@ -8,6 +8,7 @@ import HTTPSTATUS from "./constants/http.constant.js";
 import connectDb from "./config/mongo.config.js";
 import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
+import incomeRouter from "./routes/income.routes.js";
 import isAuthenticated from "./middlewares/auth.middleware.js";
 import errorHandler from "./middlewares/errorHandler.middleware.js";
 const app = express();
@@ -33,5 +34,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 app.use(`${BASE_PATH}/v1/auth`, authRouter)
 app.use(`${BASE_PATH}/v1/user`, isAuthenticated, userRouter)
+app.use(`${BASE_PATH}/v1/income`, isAuthenticated, incomeRouter)
+
 app.use(errorHandler)
 app.listen(config.PORT, () => console.log(`Server is Intercepting Requests on port = http://localhost:${config.PORT}`))
