@@ -1,6 +1,7 @@
 import HTTPSTATUS from "../constants/http.constant.js";
 import { AppError } from "../utils/appError.util.js";
 import { ZodError } from "zod";
+import { MulterError } from "multer";
 import ErrorCodes from "../constants/errorCodes.constant.js";
 
 const errorHandler = async (error, req, res, next) => {
@@ -9,6 +10,17 @@ const errorHandler = async (error, req, res, next) => {
             success: false,
             message: "Invalid JSON format. Please check your request payload."
         })
+    }
+
+    if (error instanceof MulterError) {
+        if (error.code === "LIMIT_FILE_SIZE") {
+            return res.status(HTTPSTATUS.BAD_REQUEST).json({
+                message: "Image size exceeds 100KB limit",
+            });
+        }
+        return res.status(HTTPSTATUS.BAD_REQUEST).json({
+            message: err.message || "Multer Error",
+        });
     }
 
     if(error instanceof ZodError) {
