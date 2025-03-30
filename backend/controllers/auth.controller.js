@@ -5,7 +5,7 @@ import HTTPSTATUS from "../constants/http.constant.js"
 import { registerUserService, loginUserService } from "../services/auth.service.js"
 import { BadRequestException } from "../utils/appError.util.js"
 const generateToken = id => 
-    jwt.sign({ id }, config.JWT_SECRET, { expiresIn: "1h" })
+    jwt.sign({ id }, config.JWT_SECRET, { expiresIn: "1d" })
 
 export const registerUserController = async (req, res, next) => {
     try {
