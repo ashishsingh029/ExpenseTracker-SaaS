@@ -1,8 +1,9 @@
 import HTTPSTATUS from "../constants/http.constant.js";
 import { AppError } from "../utils/appError.util.js";
 import { ZodError } from "zod";
-import { MulterError } from "multer";
 import ErrorCodes from "../constants/errorCodes.constant.js";
+import err from "multer/lib/multer-error.js";
+import { MulterError } from "multer";
 
 const errorHandler = async (error, req, res, next) => {
     if(error instanceof SyntaxError && error.status === 400 && "body" in error) {
