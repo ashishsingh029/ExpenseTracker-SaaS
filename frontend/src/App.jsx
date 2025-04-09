@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,7 +11,15 @@ import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
 import AuthLayout from "./layouts/AuthLayout";
 import ProtectedRoute from "./layouts/ProtectedRoute"
+import useAuthStore from "./store/authStore";
+
 const App = () => {
+  // Initialize Auth store in App start
+  const initializeAuth = useAuthStore((state) => state.initializeAuth);
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
+
   return (
     <Router>
       <Routes>

@@ -1,4 +1,3 @@
-// import { baseUrl } from "./helpers";
 export const API_PATHS = {
     AUTH: {
         LOGIN: "/v1/auth/login",

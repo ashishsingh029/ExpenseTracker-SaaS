@@ -30,7 +30,6 @@ const AuthLayout = () => {
     </div>
   );
 };
-
 export default AuthLayout;
 
 const StatusInfoCard = ({ icon, label, value, color }) => {

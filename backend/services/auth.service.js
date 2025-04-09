@@ -6,6 +6,7 @@ export const registerUserService = async body => {
     if (existingUser) {
         throw new BadRequestException("Email already exists");
     }
+
     const user = new UserModel({ email, name, password, profileImage })
     await user.save()
     return user.omitPassword();

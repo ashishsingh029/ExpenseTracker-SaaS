@@ -1,35 +1,61 @@
 import React, { useState } from "react";
 import Input from "../../components/Inputs/Input";
 import { validateEmail } from "../../utils/helpers";
-import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUserFn } from "../../apis/authApis";
+import useAuthStore from "../../store/authStore";
+// import uploadImage from "../../utils/uploadImage";
+// import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [profilePic, setProfilePic] = useState(null)
   const [error, setError] = useState("");
+  const { login } = useAuthStore();
+  const navigate = useNavigate();
+  // const [profilePic, setProfilePic] = useState(null);
   const handleRegisterFormSubmit = async (event) => {
     event.preventDefault();
+    let validationError = "";
     if (!fullName) {
-      setError("Name can't be empty");
+      validationError = "Name can't be empty";
     } else if (!email) {
-      setError("Email can't be empty");
+      validationError = "Email can't be empty";
     } else if (!validateEmail(email)) {
-      setError("Enter a valid email address");
+      validationError = "Enter a valid email address";
     } else if (!password) {
-      setError("Password can't be empty");
+      validationError = "Password can't be empty";
     } else if (password.length < 7) {
-      setError("Password must be at least 7 characters long");
+      validationError = "Password must be at least 7 characters long";
     } else if (password !== confirmPassword) {
-      setError("Password and Cofirm password do not match");
-    } else {
-      setError("");
+      validationError = "Password and Cofirm password must be same";
     }
-
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+    setError("");
     // Signup api call
+    // let profileImageUrl = "";
+    try {
+      // if(profilePic) {
+      //   const imgUploadRes = await uploadImage(profilePic);
+      //   profileImageUrl =imgUploadRes.imageUrl || "";
+      // }
+      const { user, token } = await registerUserFn(fullName, email, password);
+      if (token) {
+        login(token, user);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong, try again in a few seconds");
+      }
+    }
   };
   return (
     <div className="lg-w[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
@@ -38,7 +64,7 @@ const Register = () => {
         Join us today by entering your details below.
       </p>
       <form onSubmit={handleRegisterFormSubmit}>
-        <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+        {/* <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} /> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input
             value={fullName}

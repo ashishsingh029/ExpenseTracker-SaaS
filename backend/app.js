@@ -17,12 +17,12 @@ const app = express();
 const BASE_PATH = config.BASE_PATH
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(
-//     cors({
-//         origin: config.FRONTEND_ORIGIN, // Allow only your frontend
-//         credentials: true, // Allow cookies and authorization headers
-//     })
-// )
+app.use(
+    cors({
+        origin: config.FRONTEND_ORIGIN, // Allow only your frontend
+        credentials: true, // Allow cookies and authorization headers
+    })
+)
 await connectDb();
 app.get("/", (_, res) =>
     res.status(HTTPSTATUS.OK).json({ message: "ExpenseTracker First Api" })
@@ -41,4 +41,4 @@ app.use(`${BASE_PATH}/v1/expense`, isAuthenticated, expenseRouter)
 app.use(`${BASE_PATH}/v1/dashboard`, isAuthenticated, dashboardRouter)
 
 app.use(errorHandler)
-app.listen(config.PORT, () => console.log(`Server is Intercepting Requests on port = http://localhost:${config.PORT}`))
+app.listen(config.PORT, () => console.log(`Server is Listening on = http://localhost:${config.PORT}/api`))
