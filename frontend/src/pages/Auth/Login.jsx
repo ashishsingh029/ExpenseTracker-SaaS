@@ -30,11 +30,12 @@ const Login = () => {
       return;
     }
     setError(""); 
+    
     // Login API call
     try {
       const { user, token } = await loginUserFn(email, password);
       if (token) {
-        login(token, user);
+        login(user, token);
         navigate("/dashboard");
       }
     } catch (error) {

@@ -1,40 +1,36 @@
-import { create } from 'zustand';
-// import { decodeToken } from 'react-jwt';
-import { getToken, setToken, removeToken } from '../utils/helpers';
+import { create } from "zustand";
+import { getToken, removeToken, setToken } from "../utils/helpers";
+import { getUserInfoFn } from "../apis/userApis";
 
 const useAuthStore = create((set) => ({
-  token: null,
   user: null,
-  isLoggedIn: false,
+  token: null,
 
-  login: (token, user) => {
+  login: (user, token) => {
     setToken(token);
-    set({
-      token,
-      user,
-      isLoggedIn: true,
-    });
+    set({user, token});
   },
 
   logout: () => {
     removeToken();
-    set({
-      token: null,
-      user: null,
-      isLoggedIn: false,
-    });
+    set({ token: null, user: null });
   },
 
-  initializeAuth: () => {
+  initializeAuth: async () => {
     const storedToken = getToken();
-    if (storedToken) {
-      set({
-        token: storedToken,
-        user: "Unavailable",
-        isLoggedIn: true,
-      });
+    if(storedToken) {
+      try {
+        const { user: userData } = await getUserInfoFn();
+        set({
+          token: storedToken,
+          user: userData,
+        });
+      } catch (err) {
+        console.error("Auth init failed:", err);
+        logout(); // logout method called of store
+      }
     }
-  }
+  },
 }));
 
 export default useAuthStore;
