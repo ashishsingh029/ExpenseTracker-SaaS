@@ -11,6 +11,8 @@ import RecentTransactions from '../../components/dashboard/RecentTransactions';
 import FinanceOverview from '../../components/dashboard/FinanceOverview';
 import ExpenseTransactions from '../../components/dashboard/ExpenseTransactions';
 import Last30DaysExpenses from '../../components/dashboard/Last30DaysExpenses';
+import RecentIncomeWithChart from '../../components/dashboard/RecentIncomeWithChart';
+import RecentIncome from '../../components/dashboard/RecentIncome';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -39,8 +41,8 @@ const Home = () => {
     return () => {}
   }, []);
 
+  // console.log(dashboardData);
   return (
-    
     <DashboardLayout activeMenu="Dashboard">
       <div className='my-5 mx-auto'>
 
@@ -65,17 +67,19 @@ const Home = () => {
             color="bg-red-500"
           />
         </div>
-        {/* Recent Transactions and PieChart   */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-          {/* <RecentTransactions
+
+          <RecentTransactions
             transactions={dashboardData?.recentTransactions}
             onSeeMore={() => navigate("expense")}
           />
+
           <FinanceOverview 
             totalBalance={formatDecimalValueUptoTwoPlaces(dashboardData?.totalBalance) || 0}
             totalIncome={dashboardData?.totalIncome || 0}
             totalExpense={dashboardData?.totalExpenses || 0}
-          /> */}
+          />
 
           <ExpenseTransactions
             transactions={dashboardData?.last30DaysExpenses.transactions}
@@ -84,7 +88,16 @@ const Home = () => {
 
           <Last30DaysExpenses 
             data={dashboardData?.last30DaysExpenses.transactions || []}
+          />
 
+          <RecentIncomeWithChart 
+            data={dashboardData?.last30DaysIncomes?.transactions?.slice(0, 3) || []}
+            totalIncome={dashboardData?.totalIncome || 0}
+          />
+
+          <RecentIncome 
+            transactions={dashboardData?.last30DaysIncomes?.transactions || []}
+            onSeeMore={() => navigate("/income")}
           />
         </div>
 
