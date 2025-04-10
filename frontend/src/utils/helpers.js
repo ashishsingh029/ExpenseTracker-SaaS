@@ -27,3 +27,22 @@ export const getInitials = (name) => {
   }
   return initials.toUpperCase();
 }
+
+export const addThousandsSeperator = num => {
+  if(num == null || isNaN(num)) {
+    return "";
+  }
+  const [integerPart, fractionalPart] = num.toString().split(".");
+  const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return fractionalPart ? 
+  `${formattedInteger}.${fractionalPart}` : formattedInteger;
+}
+
+export const formatDecimalValueUptoTwoPlaces = num => {
+  if(num == null || isNaN(num)) {
+    return "";
+  }
+  const [integerPart, fractionalPart] = num.toString().split(".");
+  return Number(fractionalPart ? 
+  `${integerPart}.${fractionalPart.slice(0,2)}` : integerPart);
+}

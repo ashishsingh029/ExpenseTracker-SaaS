@@ -17,7 +17,7 @@ export const getDashboardDataController = async (req, res, next) => {
         let { last30DaysExpenseTransactions, totalExpenseInLast30Days } = await last30DaysExpenseAnalyticsService(userId) 
         let lastFiveTransactions = await getFiveMostRecentTransactionsService(userId)
         return res.status(HTTPSTATUS.OK).json({
-            totalBalance: (totalIncome[0]?.total  || 0) - (totalExpense[0].total || 0),
+            totalBalance: (totalIncome[0]?.total  || 0) - (totalExpense[0]?.total || 0),
             totalIncome: totalIncome[0]?.total || 0,
             totalExpenses: totalExpense[0]?.total || 0,
             last30DaysExpenses: {
