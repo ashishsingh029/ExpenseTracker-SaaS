@@ -22,11 +22,11 @@ export const getDashboardDataController = async (req, res, next) => {
             totalExpenses: totalExpense[0]?.total || 0,
             last30DaysExpenses: {
                 total: totalExpenseInLast30Days,
-                transcations: last30DaysExpenseTransactions
+                transactions: last30DaysExpenseTransactions
             },
             last30DaysIncomes: {
                 total: totalIncomeInLast30Days,
-                transcations: last30DaysIncomeTransactions
+                transactions: last30DaysIncomeTransactions
             },
             recentTransactions: lastFiveTransactions
         })

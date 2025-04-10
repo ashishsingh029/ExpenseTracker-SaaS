@@ -4,8 +4,8 @@ import { LuArrowRight } from "react-icons/lu"
 import TransactionInfoCard from "../cards/TransactionInfoCard"
 import moment from "moment"
 
-const ExpenseTransactions = ({ transcations, onSeeMore }) => {
-    console.log(transcations)
+const ExpenseTransactions = ({ transactions, onSeeMore }) => {
+    // console.log(transactions)
     return (
         <div className="card">
             <div className="flex items-center justify-between">
@@ -17,7 +17,7 @@ const ExpenseTransactions = ({ transcations, onSeeMore }) => {
                 </button>
             </div>
             <div className="mt-6">
-              { transcations?.slice(0,5)?.map((expense) => (
+              { transactions?.slice(0,5)?.map((expense) => (
                 <TransactionInfoCard 
                   key={expense._id}
                   title={expense.category}

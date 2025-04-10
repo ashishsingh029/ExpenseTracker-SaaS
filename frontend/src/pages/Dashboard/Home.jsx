@@ -10,6 +10,7 @@ import InfoCard from '../../components/cards/InfoCard';
 import RecentTransactions from '../../components/dashboard/RecentTransactions';
 import FinanceOverview from '../../components/dashboard/FinanceOverview';
 import ExpenseTransactions from '../../components/dashboard/ExpenseTransactions';
+import Last30DaysExpenses from '../../components/dashboard/Last30DaysExpenses';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -77,8 +78,13 @@ const Home = () => {
           /> */}
 
           <ExpenseTransactions
-            transactions={dashboardData?.last30DaysExpenses.transcations}
+            transactions={dashboardData?.last30DaysExpenses.transactions}
             onSeeMore={() => navigate("expense")}
+          />
+
+          <Last30DaysExpenses 
+            data={dashboardData?.last30DaysExpenses.transactions || []}
+
           />
         </div>
 
