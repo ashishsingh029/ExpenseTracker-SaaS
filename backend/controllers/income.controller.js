@@ -9,13 +9,14 @@ import { addIncomeSchema } from "../validation/income.validation.js"
 
 export const addIncomeController = async (req, res, next) => {
     try {
-        const userId = req.user.id
-        addIncomeSchema.parse(req.body)
+        const userId = req.user.id;
+        addIncomeSchema.parse({ ...req.body, amount: Number(req.body.amount)});
         let newlyAddedIncome = await addIncomeService(userId, req.body)
         return res.status(HTTPSTATUS.CREATED).json({
             newlyAddedIncome
         })
     } catch (error) {
+        console.log(error);
         next(error)
     }
 }

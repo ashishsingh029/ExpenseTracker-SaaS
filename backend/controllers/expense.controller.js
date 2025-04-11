@@ -8,8 +8,8 @@ import {
 import { addExpenseSchema } from "../validation/expense.valiadtion.js"
 export const addExpenseController = async (req, res, next) => {
     try {
-        const userId = req.user.id
-        addExpenseSchema.parse(req.body)
+        const userId = req.user.id;
+        addExpenseSchema.parse({ ...req.body, amount: Number(req.body.amount) });
         let newlyAddedExpense = await addExpenseService(userId, req.body)
         return res.status(HTTPSTATUS.CREATED).json({
             newlyAddedExpense
