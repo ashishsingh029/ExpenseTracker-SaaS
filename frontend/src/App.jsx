@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Dashboard/Home";
@@ -8,7 +7,8 @@ import Expense from "./pages/Dashboard/Expense";
 import AuthLayout from "./layouts/AuthLayout";
 import ProtectedRoute from "./layouts/ProtectedRoute";
 import useAuthStore from "./store/authStore";
-import { Toaster } from "react-hot-toast"
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
   // Initialize Auth store in App start
@@ -17,9 +17,6 @@ const App = () => {
     initializeAuth();
   }, [initializeAuth]);
 
-  // if (loading) {
-  //   return <div>Loading...</div>; // Show loading until auth is initialized
-  // }
 
   return (
     <>
@@ -38,13 +35,14 @@ const App = () => {
             <Route path="/income" element={<Income />} />
             <Route path="/expense" element={<Expense />} />
           </Route>
+        <Route path="*" element={<div className="h-screen w-screen flex items-center justify-center text-4xl">Not Found</div>}></Route>
         </Routes>
       </Router>
-      <Toaster 
+      <Toaster
         toastOptions={{
           className: "",
           style: {
-            fontSize: "13px"
+            fontSize: "13px",
           },
         }}
       />

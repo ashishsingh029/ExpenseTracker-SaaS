@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "../../components/Inputs/Input";
 import { validateEmail } from "../../utils/helpers";
 import { Link, useNavigate } from "react-router-dom";
@@ -46,7 +46,7 @@ const Register = () => {
       // }
       const { user, token } = await registerUserFn(fullName, email, password);
       if (token) {
-        login(token, user);
+        login(user, token);
         navigate("/dashboard");
       }
     } catch (error) {

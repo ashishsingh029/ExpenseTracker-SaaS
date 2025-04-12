@@ -4,18 +4,16 @@ import useAuthStore from "../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import CharAvatar from "../cards/CharAvatar";
 
-const SideMenu = ({ activeMenu }) => {
-  const { user, logout } = useAuthStore();
+const SideMenu = ({ activeMenu, setIsOpenLogoutDialog }) => {
+  const { user } = useAuthStore();
   const navigate = useNavigate();
   const handleClick = (route) => {
     if (route === "logout") {
-      logout();
-      navigate("/login");
+      setIsOpenLogoutDialog(true);
     } else {
       navigate(route);
     }
   };
-  // console.log(user.user);
   if (!user) {
     return <div>Loading User...</div>;
   }

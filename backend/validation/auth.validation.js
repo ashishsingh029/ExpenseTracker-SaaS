@@ -1,10 +1,6 @@
 import { z } from "zod";
 
-const emailSchema = z
-  .string()
-  .trim()
-  .email("Invalid email address")
-  .max(50);
+const emailSchema = z.string().trim().email("Invalid email address").max(50);
 
 const passwordSchema = z
   .string()

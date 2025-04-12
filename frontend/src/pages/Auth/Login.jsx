@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Inputs/Input";
-import { setToken, validateEmail } from "../../utils/helpers";
+import { validateEmail } from "../../utils/helpers";
 import { loginUserFn } from "../../apis/authApis";
 import useAuthStore from "../../store/authStore";
 
@@ -15,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const handleLoginFormSubmit = async (event) => {
     event.preventDefault();
-    let validationError = ""; 
+    let validationError = "";
     if (!email) {
       validationError = "Email can't be empty";
     } else if (!validateEmail(email)) {
@@ -29,8 +29,8 @@ const Login = () => {
       setError(validationError);
       return;
     }
-    setError(""); 
-    
+    setError("");
+
     // Login API call
     try {
       const { user, token } = await loginUserFn(email, password);

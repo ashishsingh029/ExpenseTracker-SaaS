@@ -1,20 +1,14 @@
 // import React from 'react'
 import {
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
-  Cell,
+  CartesianGrid,
+  Area,
+  AreaChart,
 } from "recharts";
-// import CustomTooltip from "./CustomTooltip";
-const CustomBarChart = ({ data }) => {
-  // Function to alternate colors
-  const getBarColor = (index) => (index & 1 ? "#cfbefb" : "#875cf5");
-
+const CustomLineChart = ({ data }) => {
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -36,7 +30,13 @@ const CustomBarChart = ({ data }) => {
   return (
     <div className="bg-white mt-6">
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data}>
+        <AreaChart data={data}>
+          <defs>
+            <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#875cf5" stopOpacity={0.4} />
+              <stop offset="95%" stopColor="#875cf5" stopOpacity={0} />
+            </linearGradient>
+          </defs>
           <CartesianGrid stroke="none" />
           <XAxis
             dataKey="month"
@@ -45,21 +45,18 @@ const CustomBarChart = ({ data }) => {
           />
           <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
           <Tooltip content={<CustomTooltip />} />
-          <Bar
+          <Area
+            type="monotone"
             dataKey="amount"
-            fill="#FF8042"
-            radius={[10, 10, 2, 2]}
-            activeDot={{ r: 8, fill: "yellow" }}
-            activeStyle={{ fill: "green" }}
-          >
-            {data?.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={getBarColor(index)} />
-            ))}
-          </Bar>
-        </BarChart>
+            stroke="#875cf5"
+            fill="url(#incomeGradient)"
+            strokeWidth={3}
+            dot={{ r: 3, fill: "#ab8df" }}
+          />
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );
 };
 
-export default CustomBarChart;
+export default CustomLineChart;

@@ -1,6 +1,6 @@
 {
   "name": "expense-tracker-backend",
-  "version": "108.0.0",
+  "version": "108.0",
   "description": "",
   "main": "app.js",
   "scripts": {

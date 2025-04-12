@@ -1,5 +1,5 @@
 # ExpenseTracker-SaaS
-This is an expense tracker web application project made by me for the learning of the MERN stack framework
+This is an expense tracker web application made by me for the purpose of learning MERN stack.
 
 ##### [ npm i ] in both frontend and backend folder to install all dependencies
 

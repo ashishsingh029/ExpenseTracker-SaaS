@@ -10,7 +10,7 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
     const result = prepareIncomeBarChartData(transactions);
     // console.log(result);
     setChartData(result);
-    return () => {}
+    return () => {};
   }, [transactions]);
   return (
     <div className="card">
@@ -22,15 +22,15 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
           </p>
         </div>
         <button className="add-btn" onClick={onAddIncome}>
-          <LuPlus className="text-lg"/>
+          <LuPlus className="text-lg" />
           Add Income
         </button>
       </div>
       <div className="mt-10">
-        <CustomBarChart data={chartData}/>
+        <CustomBarChart data={chartData} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default IncomeOverview
+export default IncomeOverview;

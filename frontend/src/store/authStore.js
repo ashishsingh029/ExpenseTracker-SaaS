@@ -8,7 +8,7 @@ const useAuthStore = create((set) => ({
 
   login: (user, token) => {
     setToken(token);
-    set({user, token});
+    set({ user, token });
   },
 
   logout: () => {
@@ -18,7 +18,7 @@ const useAuthStore = create((set) => ({
 
   initializeAuth: async () => {
     const storedToken = getToken();
-    if(storedToken) {
+    if (storedToken) {
       try {
         const { user: userData } = await getUserInfoFn();
         set({
@@ -27,7 +27,7 @@ const useAuthStore = create((set) => ({
         });
       } catch (err) {
         console.error("Auth init failed:", err);
-        logout(); // logout method called of store
+        set({ token: null, user: null }); // logout method called of store
       }
     }
   },

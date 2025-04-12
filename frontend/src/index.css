@@ -11,6 +11,7 @@
   html {
     font-family: var(--font-display);
   }
+
   body {
     background-color: #fcfbfc;
     overflow-x: hidden;
@@ -19,6 +20,7 @@
 
 /* Css for hiding the updown icon on right in number input type */
 @layer components {
+
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -26,12 +28,13 @@
   }
 
   input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
+    -moz-appearance: textfield;
+    /* Firefox */
   }
 }
 
 .input-box {
-  @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-3 mb-4 mt-3 border border-slate-200 outline-none;  
+  @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-3 mb-4 mt-3 border border-slate-200 outline-none;
 }
 
 .btn-primary {
