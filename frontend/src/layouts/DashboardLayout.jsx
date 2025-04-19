@@ -17,7 +17,9 @@ const DashboardLayout = ({ activeMenu, children }) => {
   }
   return (
     <div>
-      <Navbar activeMenu={activeMenu} />
+      <Navbar activeMenu={activeMenu} 
+        setIsOpenLogoutDialog={setIsOpenLogoutDialog}
+      />
       {user && (
         <div className="flex">
           <div className="max-[1080px]:hidden">

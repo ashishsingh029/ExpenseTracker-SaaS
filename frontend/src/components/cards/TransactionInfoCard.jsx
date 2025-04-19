@@ -5,7 +5,7 @@ import {
   LuTrash2,
 } from "react-icons/lu";
 import { formatDecimalValueUptoTwoPlaces } from "../../utils/helpers";
-import { FiEdit } from "react-icons/fi";
+// import { FiEdit } from "react-icons/fi";
 import { LuEllipsis } from "react-icons/lu";
 
 const TransactionInfoCard = ({
@@ -36,30 +36,29 @@ const TransactionInfoCard = ({
           <p className="text-xs text-gray-400 mt-1">{date}</p>
         </div>
         <div className="flex items-center gap-2">
-          {!hideDeleteBtn && (
+          {/* {!hideDeleteBtn && (
             <button
               className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
               onClick={onDelete}
             >
               <LuTrash2 size={18} color="red" title="Delete"/>
             </button>
-          )}
+          )} */}
           {!hideDeleteBtn && (
             <button
-              className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+              className="text-gray-400 hover:text-red-500 opacity-100 group-hover:opacity-100 transition-opacity cursor-pointer"
               onClick={onDelete}
             >
-              <LuEllipsis size={18} color="red" title="Delete"/>
+              <LuEllipsis size={18} color="red" title="More"/>
             </button>
           )}
           <div
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md ${getAmountStyles()}`}
-          >
-            <h6 className="text-xs font-medium">
-              {type === "income" ? "+" : "-"} ₹
-              {formatDecimalValueUptoTwoPlaces(amount)}
-            </h6>
-            {type === "income" ? <LuTrendingUp /> : <LuTrendingDown />}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md ${getAmountStyles()}`}>
+              <h6 className="text-xs font-medium">
+                {type === "income" ? "+" : "-"} ₹
+                {formatDecimalValueUptoTwoPlaces(amount)}
+              </h6>
+              {type === "income" ? <LuTrendingUp /> : <LuTrendingDown />}
           </div>
         </div>
       </div>

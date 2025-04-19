@@ -9,6 +9,7 @@ const SideMenu = ({ activeMenu, setIsOpenLogoutDialog }) => {
   const navigate = useNavigate();
   const handleClick = (route) => {
     if (route === "logout") {
+      // console.log("Type of setIsOpenLogoutDialog: ", typeof setIsOpenLogoutDialog);
       setIsOpenLogoutDialog(true);
     } else {
       navigate(route);
