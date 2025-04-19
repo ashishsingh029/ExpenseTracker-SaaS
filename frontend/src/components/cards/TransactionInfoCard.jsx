@@ -5,6 +5,8 @@ import {
   LuTrash2,
 } from "react-icons/lu";
 import { formatDecimalValueUptoTwoPlaces } from "../../utils/helpers";
+import { FiEdit } from "react-icons/fi";
+import { LuEllipsis } from "react-icons/lu";
 
 const TransactionInfoCard = ({
   title,
@@ -16,17 +18,18 @@ const TransactionInfoCard = ({
   onDelete,
 }) => {
   const getAmountStyles = () =>
-    type === "income" ? "bg-green-50 text-green-500" : "bg-red-50 text-red-500";
+    type === "income" ? "bg-green-100 text-green-500" : "bg-red-100 text-red-500";
 
   return (
     <div className="group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-gray-100/60">
-      <div className="w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-full">
+      {/* Icon Section  */}
+      {/* <div className="w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-full">
         {icon ? (
           <img src={icon} alt={title} className="w-6 h-6" />
         ) : (
           <LuUtensils />
         )}
-      </div>
+      </div> */}
       <div className="flex-1 flex items-center justify-between">
         <div>
           <p className="text-sm text-gray-700 font-medium">{title}</p>
@@ -38,7 +41,15 @@ const TransactionInfoCard = ({
               className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
               onClick={onDelete}
             >
-              <LuTrash2 size={18} />
+              <LuTrash2 size={18} color="red" title="Delete"/>
+            </button>
+          )}
+          {!hideDeleteBtn && (
+            <button
+              className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+              onClick={onDelete}
+            >
+              <LuEllipsis size={18} color="red" title="Delete"/>
             </button>
           )}
           <div
